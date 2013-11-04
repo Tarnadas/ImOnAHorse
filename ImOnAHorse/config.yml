@@ -1,0 +1,65 @@
+fuel:
+# initial fuel amount and fuel amount per refill
+  ironFuel: 200
+  goldFuel: 400
+  diamondFuel: 600
+# maximum fuel amount
+  ironMaxFuel: 400
+  goldMaxFuel: 800
+  diamondMaxFuel: 1200
+# items that are used to refill fuel
+# put the armor to be refilled and the item specified in this section into a crafting menu
+  refill_item:
+    iron: diamond
+    gold: diamond
+    diamond: diamond
+# recipes list
+# recipe shapes can contain 3 lines and can consist of keys between a-i
+# label the keys in the ingredients section
+recipes:
+  saddle:
+    shape:
+      0: aaa
+      1: b b
+    ingredients:
+      a: leather
+      b: iron_ingot
+  iron_barding:
+    shape:
+      0: aaa
+      1: a a
+    ingredients:
+      a: iron_ingot
+  gold_barding:
+    shape:
+      0: aaa
+      1: a a
+    ingredients:
+      a: gold_ingot
+  diamond_barding:
+    shape:
+      0: aaa
+      1: a a
+    ingredients:
+      a: diamond
+  iron_barding_magic:
+    shape:
+      0: aba
+      1: aaa
+    ingredients:
+      a: iron_ingot
+      b: saddle
+  gold_barding_magic:
+    shape:
+      0: aba
+      1: aaa
+    ingredients:
+      a: gold_ingot
+      b: saddle
+  diamond_barding_magic:
+    shape:
+      0: aba
+      1: aaa
+    ingredients:
+      a: diamond
+      b: saddle

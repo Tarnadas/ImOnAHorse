@@ -1,0 +1,44 @@
+name: ImOnAHorse
+author: Tarnadas
+main: com.Tarnadas.ImOnAHorse.ImOnAHorse
+version: 1.1
+commands:
+  horse:
+permissions:
+  horse.*:
+    description: Gives access to everything
+    children:
+      horse.reload: true
+      horse.use.*: true
+      horse.leash: true
+      horse.parkour.*: true
+      horse.noefuel: true
+    default: op
+  horse.reload:
+    description: Reloads this plugin
+  horse.use.*:
+    description: Allows to fly with every horse armor
+    children:
+      horse.use.iron: true
+      horse.use.gold: true
+      horse.use.diamond: true
+  horse.use.iron:
+    description: Allows to fly with iron horse armor
+  horse.use.gold:
+    description: Allows to fly with gold horse armor
+  horse.use.diamond:
+    description: Allows to fly with diamond horse armor
+  horse.leash:
+    description: Allows to use the magical leash
+  horse.parkour.*:
+    description:
+    children:
+      horse.parkour.play: true
+      horse.parkour.create: true
+  horse.parkour.play:
+    description:
+  horse.parkour.create:
+    description:
+  horse.nofuel:
+    description: No usage of fuel
+softdepend: [Vault, WorldGuard]
