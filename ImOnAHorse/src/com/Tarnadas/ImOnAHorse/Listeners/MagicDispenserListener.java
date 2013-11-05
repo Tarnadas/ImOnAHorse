@@ -8,9 +8,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 
-import com.Tarnadas.ImOnAHorse.Parkour;
 import com.Tarnadas.ImOnAHorse.Exceptions.DispenserAlreadyRegisteredException;
 import com.Tarnadas.ImOnAHorse.Exceptions.ParkourDoesNotExistException;
+import com.Tarnadas.ImOnAHorse.parkour.Parkour;
 
 public class MagicDispenserListener implements Listener {
 	

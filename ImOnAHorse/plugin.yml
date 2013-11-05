@@ -35,10 +35,20 @@ permissions:
     children:
       horse.parkour.play: true
       horse.parkour.create: true
+      horse.parkour.sign.*: true
   horse.parkour.play:
     description:
   horse.parkour.create:
     description:
+  horse.parkour.sign.*:
+    description:
+    children:
+      horse.parkour.sign.use: true
+      horse.parkour.sign.create: true
+  horse.parkour.sign.use:
+    description: Allows usage of parkour signs
+  horse.parkour.sign.create:
+    description: Allows to create parkour signs
   horse.nofuel:
     description: No usage of fuel
 softdepend: [Vault, WorldGuard]

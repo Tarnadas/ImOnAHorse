@@ -30,7 +30,11 @@ import com.Tarnadas.ImOnAHorse.Listeners.HorseListener;
 import com.Tarnadas.ImOnAHorse.Listeners.LeashListener;
 import com.Tarnadas.ImOnAHorse.Listeners.MagicDispenserListener;
 import com.Tarnadas.ImOnAHorse.Listeners.ParkourListener;
+import com.Tarnadas.ImOnAHorse.Listeners.ParkourSignListener;
 import com.Tarnadas.ImOnAHorse.Listeners.WorldGuardListener;
+import com.Tarnadas.ImOnAHorse.parkour.Checkpoint;
+import com.Tarnadas.ImOnAHorse.parkour.Parkour;
+import com.Tarnadas.ImOnAHorse.parkour.ParkourSign;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 public class ImOnAHorse extends JavaPlugin {
@@ -61,11 +65,15 @@ public class ImOnAHorse extends JavaPlugin {
 		Parkour.loadParkourData();
 		ParkourListener.onInit();
 		MagicLeash.onLoad();
+		ParkourSign.onLoad();
+//		HorseEx.load();
+//		HorseEx.registerEntities();
 		getServer().getPluginManager().registerEvents(new HorseListener(), this);
 		getServer().getPluginManager().registerEvents(new CraftListener(), this);
 		getServer().getPluginManager().registerEvents(new ParkourListener(), this);
 		getServer().getPluginManager().registerEvents(new MagicDispenserListener(), this);
 		getServer().getPluginManager().registerEvents(new LeashListener(), this);
+		getServer().getPluginManager().registerEvents(new ParkourSignListener(), this);
 		economyEnabled = setupEconomy();
 		wgEnabled = loadWorldGuard();
 		if (wgEnabled) getServer().getPluginManager().registerEvents(new WorldGuardListener(), this);
@@ -99,6 +107,7 @@ public class ImOnAHorse extends JavaPlugin {
 		MagicSaddle.onInit(this);
 		MagicLeash.onLoad();
 		Checkpoint.onLoad();
+		ParkourSign.onLoad();
 		boolean b = Parkour.reloadParkourData(player);
 		this.getLogger().info("Reloaded");
 		return b;
@@ -140,6 +149,15 @@ public class ImOnAHorse extends JavaPlugin {
 									ChatColor.AQUA + " for detailed information");
 					return true;
 				}
+				
+				
+//				if (args[0].equalsIgnoreCase("horse")) {
+//					HorseEx.spawn(player);
+//					sender.sendMessage("spawned");
+//					return true;
+//				}
+				
+				
 				
 				if (args[0].equalsIgnoreCase("help")) {
 

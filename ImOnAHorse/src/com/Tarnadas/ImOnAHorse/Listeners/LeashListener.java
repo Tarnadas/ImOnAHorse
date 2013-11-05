@@ -34,7 +34,6 @@ public class LeashListener implements Listener {
 	@SuppressWarnings("deprecation")
 	@EventHandler(priority=EventPriority.NORMAL)
     public void onPlayerLeashEntityEvent(PlayerLeashEntityEvent event) {
-		if (!(event.getEntity() instanceof Horse)) return;
 		if (!(event.getLeashHolder() instanceof Player)) return;
 		final Player player = event.getPlayer();
 		if (!MagicLeash.isMagicLeash((player.getInventory().getItemInHand()))) return;
@@ -44,58 +43,30 @@ public class LeashListener implements Listener {
 			return;
 		}
 		event.setCancelled(true);
-//		boolean cancel = false;
+		if (!(event.getEntity() instanceof Horse)) {
+			String s = ChatColor.DARK_GREEN + "[ImOnAHorse] " + ChatColor.RED + "This is not a horse!";
+			event.getPlayer().sendMessage(s);
+			return;
+		}
 		try {
 			MagicLeash.getPlayerLeash(player);
 			MagicLeash.addHorse((Horse) event.getEntity(), event.getPlayer());
 		} catch (NoCustomNameSetException e) {
-//			cancel = true;
 			String s = ChatColor.DARK_GREEN + "[ImOnAHorse] " + ChatColor.RED + "No custom name has been set!";
 			event.getPlayer().sendMessage(s);
 		} catch (HorseAlreadyRegisteredException e) {
-//			cancel = true;
 			String s = ChatColor.DARK_GREEN + "[ImOnAHorse] " + ChatColor.RED + "A horse with this name is already registered!";
 			event.getPlayer().sendMessage(s);
 		} catch (NotYourHorseException e) {
-//			cancel = true;
 			String s = ChatColor.DARK_GREEN + "[ImOnAHorse] " + ChatColor.RED + "This is not your horse!";
 			event.getPlayer().sendMessage(s);
 		} catch (LeashInventoryFullException e) {
-//			cancel = true;
 			String s = ChatColor.DARK_GREEN + "[ImOnAHorse] " + ChatColor.RED + "Your leash inventory is full!";
 			event.getPlayer().sendMessage(s);
 		} catch (InventoryFullException e) {
 			e.printStackTrace();
 		} finally {
-//			if (cancel) {
-//				final LivingEntity entity = (LivingEntity) event.getEntity();
-//				new BukkitRunnable() {
-//					@SuppressWarnings("deprecation")
-//					@Override
-//					public void run() {
-//						try {
-//							MagicLeash.getPlayerLeash(player);
-//							entity.setLeashHolder(null);
-							player.updateInventory();
-//						} catch (InventoryFullException e) {
-//							e.printStackTrace();
-//						}
-//					}
-//				}.runTask(ImOnAHorse.plugin);
-//			} else {
-//				new BukkitRunnable() {
-//					@SuppressWarnings("deprecation")
-//					@Override
-//					public void run() {
-//						try {
-//							MagicLeash.getPlayerLeash(player);
-//							player.updateInventory();
-//						} catch (InventoryFullException e) {
-//							e.printStackTrace();
-//						}
-//					}
-//				}.runTask(ImOnAHorse.plugin);
-//			}
+			player.updateInventory();
 		}
 	}
 

@@ -1,0 +1,16 @@
+- v1.1
+
+ -added parkour join and leave signs (permissions: horse.parkour.sign.create and horse.parkour.sign.use)
+ -displays the current rewards on join of a parkour
+ -disabled dismounting while in parkour instead of restarting
+ -added Metrics support
+ -fix: can no longer leash entities other than horses with the magic leash
+
+- v1.0.1
+
+ -added configurability for fuel amount and refill items
+ -changed the default recipes
+
+- v1.0:
+
+ -first release

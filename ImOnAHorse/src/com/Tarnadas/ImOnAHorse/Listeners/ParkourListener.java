@@ -22,12 +22,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.Tarnadas.ImOnAHorse.ImOnAHorse;
-import com.Tarnadas.ImOnAHorse.Parkour;
 import com.Tarnadas.ImOnAHorse.Exceptions.FinishNotSetException;
 import com.Tarnadas.ImOnAHorse.Exceptions.ParkourDoesNotExistException;
 import com.Tarnadas.ImOnAHorse.Exceptions.PlayerAlreadyInParkourException;
 import com.Tarnadas.ImOnAHorse.Exceptions.PlayerIsMountedException;
 import com.Tarnadas.ImOnAHorse.Exceptions.PlayerNotInParkourException;
+import com.Tarnadas.ImOnAHorse.parkour.Parkour;
 
 public class ParkourListener implements Listener {
 
@@ -83,25 +83,26 @@ public class ParkourListener implements Listener {
 		if (event.getExited() instanceof Player) {
 			final Player player = (Player) event.getExited();
 			if (Parkour.isPlayerInParkour(player)) {
-				try {
-					final Horse horse = (Horse) player.getVehicle();
-					Parkour.getParkour(player).restartParkour(player);
-					cooldown.add(player);
-					new BukkitRunnable() {
-						@Override
-					    public void run() {
-					    	cooldown.remove(player);
-					    	restartOnDismount(player, horse);
-					    }
-					}.runTaskLater(ImOnAHorse.plugin, delay);
-					String s = ChatColor.DARK_GREEN + "[ImOnAHorse] " + ChatColor.RED + "You have been dismounted so you have to restart the parkour!";
-					player.sendMessage(s);
-				} catch (ParkourDoesNotExistException
-						| PlayerIsMountedException | FinishNotSetException
-						| PlayerAlreadyInParkourException
-						| PlayerNotInParkourException e) {
-					e.printStackTrace();
-				}
+				event.setCancelled(true);
+//				try {
+//					final Horse horse = (Horse) player.getVehicle();
+//					Parkour.getParkour(player).restartParkour(player);
+//					cooldown.add(player);
+//					new BukkitRunnable() {
+//						@Override
+//					    public void run() {
+//					    	cooldown.remove(player);
+//					    	restartOnDismount(player, horse);
+//					    }
+//					}.runTaskLater(ImOnAHorse.plugin, delay);
+//					String s = ChatColor.DARK_GREEN + "[ImOnAHorse] " + ChatColor.RED + "You have been dismounted so you have to restart the parkour!";
+//					player.sendMessage(s);
+//				} catch (ParkourDoesNotExistException
+//						| PlayerIsMountedException | FinishNotSetException
+//						| PlayerAlreadyInParkourException
+//						| PlayerNotInParkourException e) {
+//					e.printStackTrace();
+//				}
 			}
 		}
 	}

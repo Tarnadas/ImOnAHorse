@@ -1,4 +1,4 @@
-package com.Tarnadas.ImOnAHorse;
+package com.Tarnadas.ImOnAHorse.parkour;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,6 +26,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import com.Tarnadas.ImOnAHorse.ImOnAHorse;
+import com.Tarnadas.ImOnAHorse.MagicArmor;
 import com.Tarnadas.ImOnAHorse.Exceptions.CheckpointAlreadyExistsException;
 import com.Tarnadas.ImOnAHorse.Exceptions.CheckpointDoesNotExistException;
 import com.Tarnadas.ImOnAHorse.Exceptions.FinishNotSetException;
@@ -37,6 +39,8 @@ import com.Tarnadas.ImOnAHorse.Exceptions.PlayerIsMountedException;
 import com.Tarnadas.ImOnAHorse.Exceptions.PlayerIsNotAddingDispenserException;
 import com.Tarnadas.ImOnAHorse.Exceptions.PlayerNotInParkourException;
 import com.Tarnadas.ImOnAHorse.Listeners.ParkourListener;
+import com.Tarnadas.ImOnAHorse.MagicArmor.Armor;
+import com.Tarnadas.ImOnAHorse.parkour.MagicDispenser.ProjectileType;
 
 public class Parkour extends BukkitRunnable {
 
@@ -209,10 +213,53 @@ public class Parkour extends BukkitRunnable {
 	        ex.printStackTrace();
 	    }
 		player.teleport(parkour.start);
+		String s = ChatColor.DARK_GREEN + "[ImOnAHorse] " + ChatColor.AQUA + "You started parkour " + parkour.name +
+				". Reward:" + parkour.getRewardString(null);
+		player.sendMessage(s);
 		for (MagicDispenser dispenser : parkour.checkpoints.get(0).getDispensers()) {
 			dispenser.setEnabled(true);
 		}
 		final Horse horse = (Horse) parkour.start.getWorld().spawnEntity(parkour.start, EntityType.HORSE);
+		new BukkitRunnable() {
+			@Override
+		    public void run() {
+		    	if (!player.isOnline()) {
+		    		horse.remove();
+		    		return;
+		    	}
+				horse.setPassenger(player);
+				horse.setOwner(player);
+				horse.setStyle(Horse.Style.values()[(int) (Math.random()*5)]);
+				HorseInventory inventory = horse.getInventory();
+				inventory.setArmor(MagicArmor.createMagicArmor(MagicArmor.Armor.PARKOUR));
+				inventory.setSaddle(new ItemStack(Material.SADDLE));       
+		    }
+		}.runTask(ImOnAHorse.plugin);
+	}
+	
+	public void startParkour(final Player player) throws PlayerIsMountedException,
+	FinishNotSetException, PlayerAlreadyInParkourException {
+		if (this.finish == null) throw new FinishNotSetException();
+		if (Parkour.isPlayerInParkour(player)) throw new PlayerAlreadyInParkourException();
+		if (player.isInsideVehicle()) throw new PlayerIsMountedException();
+		String playerName = player.getName().toLowerCase();
+		this.checkpoints.get(0).addPlayer(playerName);
+		this.playerCheckpoint.put(playerName, this.checkpoints.get(0));
+		playersInParkour.add(playerName);
+		this.config.getConfigurationSection("players").set(playerName, Parkour.toString(player.getLocation()));
+		try {
+			this.config.save(this.file);
+	    } catch (IOException ex) {
+	        ex.printStackTrace();
+	    }
+		player.teleport(this.start);
+		String s = ChatColor.DARK_GREEN + "[ImOnAHorse] " + ChatColor.AQUA + "You started parkour " + this.name +
+				". Reward:" + this.getRewardString(null);
+		player.sendMessage(s);
+		for (MagicDispenser dispenser : this.checkpoints.get(0).getDispensers()) {
+			dispenser.setEnabled(true);
+		}
+		final Horse horse = (Horse) this.start.getWorld().spawnEntity(this.start, EntityType.HORSE);
 		new BukkitRunnable() {
 			@Override
 		    public void run() {
@@ -646,8 +693,9 @@ public class Parkour extends BukkitRunnable {
 				s = s + "\n" + ChatColor.RED + item.getAmount() + " " + item.getType().toString().toLowerCase();
 			}
 		if (rewardMoney != 0) {
-			s = s + "\n" + ChatColor.YELLOW + rewardMoney + "$ (current: " +
-					(int) ImOnAHorse.plugin.getEconomy().getBalance(player.getName()) + "$)";
+			s = s + "\n" + ChatColor.YELLOW + rewardMoney + "$";
+			if (player != null)
+				s = s + " (current: " + (int) ImOnAHorse.plugin.getEconomy().getBalance(player.getName()) + "$)";
 		}
 		if (s.equals("")) return ChatColor.RED + "\nNo reward has been set yet!";
 		return s;
@@ -660,6 +708,14 @@ public class Parkour extends BukkitRunnable {
 			out = out + "\n" + s;
 		}
 		return out;
+	}
+	
+	public static Parkour getParkour(String name) throws ParkourDoesNotExistException {
+		name = name.toLowerCase();
+		if (parkours.keySet().contains(name)) {
+			return parkours.get(name);
+		}
+		throw new ParkourDoesNotExistException();
 	}
 	
 	public boolean isDispenserRegistered(Block block) {

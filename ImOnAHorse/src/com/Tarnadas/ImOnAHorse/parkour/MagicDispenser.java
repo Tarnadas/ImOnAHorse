@@ -1,4 +1,4 @@
-package com.Tarnadas.ImOnAHorse;
+package com.Tarnadas.ImOnAHorse.parkour;
 
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -13,6 +13,8 @@ import org.bukkit.entity.Snowball;
 import org.bukkit.material.MaterialData;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+
+import com.Tarnadas.ImOnAHorse.ImOnAHorse;
 
 public class MagicDispenser extends BukkitRunnable {
 

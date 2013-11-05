@@ -14,8 +14,8 @@ import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.util.Vector;
 
 import com.Tarnadas.ImOnAHorse.MagicArmor;
-import com.Tarnadas.ImOnAHorse.Parkour;
 import com.Tarnadas.ImOnAHorse.Exceptions.NotEnoughFuelException;
+import com.Tarnadas.ImOnAHorse.parkour.Parkour;
 
 public class HorseListener implements Listener {
 	
