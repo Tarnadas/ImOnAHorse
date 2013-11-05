@@ -39,8 +39,6 @@ import com.Tarnadas.ImOnAHorse.Exceptions.PlayerIsMountedException;
 import com.Tarnadas.ImOnAHorse.Exceptions.PlayerIsNotAddingDispenserException;
 import com.Tarnadas.ImOnAHorse.Exceptions.PlayerNotInParkourException;
 import com.Tarnadas.ImOnAHorse.Listeners.ParkourListener;
-import com.Tarnadas.ImOnAHorse.MagicArmor.Armor;
-import com.Tarnadas.ImOnAHorse.parkour.MagicDispenser.ProjectileType;
 
 public class Parkour extends BukkitRunnable {
 

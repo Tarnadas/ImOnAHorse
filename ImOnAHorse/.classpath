@@ -5,6 +5,6 @@
 	<classpathentry kind="lib" path="C:/Users/Mario/Dropbox/workspace/Vault.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Mario/Dropbox/workspace/WorldGuard.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Mario/Dropbox/workspace/WorldEdit.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Mario/Dropbox/workspace/craftbukkit-1.6.4-R2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mario/Dropbox/workspace/bukkit-1.6.4-R1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

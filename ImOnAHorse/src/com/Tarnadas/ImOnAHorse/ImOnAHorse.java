@@ -66,8 +66,6 @@ public class ImOnAHorse extends JavaPlugin {
 		ParkourListener.onInit();
 		MagicLeash.onLoad();
 		ParkourSign.onLoad();
-//		HorseEx.load();
-//		HorseEx.registerEntities();
 		getServer().getPluginManager().registerEvents(new HorseListener(), this);
 		getServer().getPluginManager().registerEvents(new CraftListener(), this);
 		getServer().getPluginManager().registerEvents(new ParkourListener(), this);
@@ -107,8 +105,8 @@ public class ImOnAHorse extends JavaPlugin {
 		MagicSaddle.onInit(this);
 		MagicLeash.onLoad();
 		Checkpoint.onLoad();
-		ParkourSign.onLoad();
 		boolean b = Parkour.reloadParkourData(player);
+		ParkourSign.onLoad();
 		this.getLogger().info("Reloaded");
 		return b;
 	}
@@ -144,20 +142,11 @@ public class ImOnAHorse extends JavaPlugin {
 				Player player = (Player) sender;
 				
 				if (args.length == 0) {
-					sender.sendMessage(ChatColor.DARK_GREEN + "ImOnAHorse v1.1\n" +
+					sender.sendMessage(ChatColor.DARK_GREEN + "ImOnAHorse v1.1.1\n" +
 							ChatColor.AQUA + "by Tarnadas\nType " + ChatColor.RED + "/horse help" +
 									ChatColor.AQUA + " for detailed information");
 					return true;
 				}
-				
-				
-//				if (args[0].equalsIgnoreCase("horse")) {
-//					HorseEx.spawn(player);
-//					sender.sendMessage("spawned");
-//					return true;
-//				}
-				
-				
 				
 				if (args[0].equalsIgnoreCase("help")) {
 

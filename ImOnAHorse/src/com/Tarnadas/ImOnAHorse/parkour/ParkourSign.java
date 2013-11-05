@@ -80,6 +80,25 @@ public class ParkourSign {
 	}
 	
 	public void release() {
+		File file = new File(ImOnAHorse.plugin.getDataFolder(), "signs.yml");
+		FileConfiguration config = YamlConfiguration.loadConfiguration(file);
+		List<String> signList = config.getStringList("signs");
+		int i = -1;
+		String toString = this.toString();
+		for (String s : signList) {
+			if (toString.equals(s)) {
+				i = signList.indexOf(s);
+				break;
+			}
+		}
+		if (i != -1) 
+			signList.remove(i);
+		config.set("signs", signList);
+		try {
+			config.save(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		signs.remove(this.loc);
 	}
 	

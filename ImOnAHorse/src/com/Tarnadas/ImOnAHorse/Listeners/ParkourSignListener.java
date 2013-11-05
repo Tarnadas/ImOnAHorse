@@ -18,8 +18,8 @@ import com.Tarnadas.ImOnAHorse.parkour.ParkourSign;
 public class ParkourSignListener implements Listener {
 
 	private static final String firstLine = ChatColor.DARK_RED + "[ImOnAHorse]";
-	private static final String secondLine = ChatColor.GOLD + "join parkour";
-	private static final String secondLineLeave = ChatColor.GOLD + "leave parkour";
+	private static final String secondLine = ChatColor.AQUA + "join parkour";
+	private static final String secondLineLeave = ChatColor.AQUA + "leave parkour";
 	
 	@EventHandler(priority=EventPriority.NORMAL)
     public void onSignChangeEvent(SignChangeEvent event) {
@@ -31,12 +31,11 @@ public class ParkourSignListener implements Listener {
 			if (!event.getLine(2).equals("")) {
 				try {
 					Parkour parkour = Parkour.getParkour(event.getLine(2));
-					if (parkour == null) System.out.println("falsch");
 					new ParkourSign(event.getBlock().getLocation(), parkour);
 					Sign sign = (Sign) event.getBlock().getState();
 					sign.setLine(0, firstLine);
 					sign.setLine(1, secondLine);
-					sign.setLine(2, ChatColor.GOLD + event.getLine(2));
+					sign.setLine(2, ChatColor.AQUA + event.getLine(2));
 					sign.setLine(3, "");
 					sign.update();
 					String s = ChatColor.DARK_GREEN + "[ImOnAHorse] " + ChatColor.AQUA + "Parkour sign created for parkour " + event.getLine(2);
@@ -82,7 +81,7 @@ public class ParkourSignListener implements Listener {
 	@EventHandler(priority=EventPriority.NORMAL)
     public void onBlockBreakEvent(BlockBreakEvent event) {
 		
-		if (!event.getBlock().getType().equals(Material.SIGN) || !event.getBlock().getType().equals(Material.SIGN_POST)) return;
+		if (!event.getBlock().getType().equals(Material.SIGN) && !event.getBlock().getType().equals(Material.SIGN_POST)) return;
 		if (!ParkourSign.isParkourSign(event.getBlock().getLocation())) return;
 		ParkourSign.getSign(event.getBlock().getLocation()).release();
 		String s = ChatColor.DARK_GREEN + "[ImOnAHorse] " + ChatColor.AQUA + "You have deleted a parkour sign";
