@@ -142,7 +142,7 @@ public class ImOnAHorse extends JavaPlugin {
 				Player player = (Player) sender;
 				
 				if (args.length == 0) {
-					sender.sendMessage(ChatColor.DARK_GREEN + "ImOnAHorse v1.1.1\n" +
+					sender.sendMessage(ChatColor.DARK_GREEN + "ImOnAHorse v1.1.2\n" +
 							ChatColor.AQUA + "by Tarnadas\nType " + ChatColor.RED + "/horse help" +
 									ChatColor.AQUA + " for detailed information");
 					return true;

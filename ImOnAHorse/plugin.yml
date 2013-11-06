@@ -1,7 +1,7 @@
 name: ImOnAHorse
 author: Tarnadas
 main: com.Tarnadas.ImOnAHorse.ImOnAHorse
-version: 1.1.1
+version: 1.1.2
 commands:
   horse:
 permissions:
