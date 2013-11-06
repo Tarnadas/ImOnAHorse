@@ -26,40 +26,46 @@ recipes:
       b: iron_ingot
   iron_barding:
     shape:
-      0: aaa
-      1: a a
+      0: aba
+      1: aaa
     ingredients:
       a: iron_ingot
+      b: saddle
   gold_barding:
     shape:
-      0: aaa
-      1: a a
+      0: aba
+      1: aaa
     ingredients:
       a: gold_ingot
+      b: saddle
   diamond_barding:
     shape:
-      0: aaa
-      1: a a
+      0: aba
+      1: aaa
     ingredients:
       a: diamond
+      b: saddle
   iron_barding_magic:
     shape:
-      0: aba
+      0: cbc
       1: aaa
     ingredients:
       a: iron_ingot
       b: saddle
+      c: iron_block
   gold_barding_magic:
     shape:
-      0: aba
+      0: cbc
       1: aaa
     ingredients:
       a: gold_ingot
       b: saddle
+      c: gold_block
   diamond_barding_magic:
     shape:
-      0: aba
+      0: cbc
       1: aaa
     ingredients:
       a: diamond
       b: saddle
+      c: diamond_block

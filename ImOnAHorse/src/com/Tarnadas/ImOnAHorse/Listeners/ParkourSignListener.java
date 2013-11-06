@@ -81,7 +81,7 @@ public class ParkourSignListener implements Listener {
 	@EventHandler(priority=EventPriority.NORMAL)
     public void onBlockBreakEvent(BlockBreakEvent event) {
 		
-		if (!event.getBlock().getType().equals(Material.SIGN) && !event.getBlock().getType().equals(Material.SIGN_POST)) return;
+		if (!event.getBlock().getType().equals(Material.SIGN) && !event.getBlock().getType().equals(Material.SIGN_POST) && !event.getBlock().getType().equals(Material.WALL_SIGN)) return;
 		if (!ParkourSign.isParkourSign(event.getBlock().getLocation())) return;
 		ParkourSign.getSign(event.getBlock().getLocation()).release();
 		String s = ChatColor.DARK_GREEN + "[ImOnAHorse] " + ChatColor.AQUA + "You have deleted a parkour sign";
