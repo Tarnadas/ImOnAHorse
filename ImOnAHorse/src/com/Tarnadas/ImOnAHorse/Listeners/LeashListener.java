@@ -5,7 +5,6 @@ import java.util.Set;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Horse;
-//import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -17,13 +16,11 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
-//import org.bukkit.scheduler.BukkitRunnable;
 
-//import com.Tarnadas.ImOnAHorse.ImOnAHorse;
 import com.Tarnadas.ImOnAHorse.MagicLeash;
+import com.Tarnadas.ImOnAHorse.PlayerConfig;
 import com.Tarnadas.ImOnAHorse.Exceptions.HorseAlreadyRegisteredException;
 import com.Tarnadas.ImOnAHorse.Exceptions.InventoryFullException;
-//import com.Tarnadas.ImOnAHorse.Exceptions.InventoryFullException;
 import com.Tarnadas.ImOnAHorse.Exceptions.LeashInventoryFullException;
 import com.Tarnadas.ImOnAHorse.Exceptions.NoCustomNameSetException;
 import com.Tarnadas.ImOnAHorse.Exceptions.NotYourHorseException;
@@ -72,6 +69,7 @@ public class LeashListener implements Listener {
 
 	@EventHandler(priority=EventPriority.NORMAL)
     public void onPlayerInteractEvent(PlayerInteractEvent event) {
+		if (!Material.LEASH.equals(event.getPlayer().getInventory().getItemInHand().getType())) return;
 		if (!event.getAction().equals(Action.LEFT_CLICK_AIR) && !event.getAction().equals(Action.LEFT_CLICK_BLOCK)) return;
 		if (!MagicLeash.isMagicLeash(event.getPlayer().getInventory().getItemInHand())) return;
 		MagicLeash.openMenu(event.getPlayer());
@@ -98,8 +96,8 @@ public class LeashListener implements Listener {
 			event.setCancelled(true);
 			return;
 		}
-		MagicLeash leash = MagicLeash.getLeash((Player) event.getWhoClicked());
-		leash.releaseEgg(event.getCurrentItem());
+		Player player = (Player) event.getWhoClicked();
+		PlayerConfig.getConfig(player.getName().toLowerCase()).releaseEgg(event.getCurrentItem());
 	}
 
 	@EventHandler(priority=EventPriority.HIGH)
